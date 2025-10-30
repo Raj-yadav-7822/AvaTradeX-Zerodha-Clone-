@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/* Shrink table width on small screens */
+@media (max-width: 576px) {
+    .responsive-shrink {
+      width: 100%;
+      font-size: 14px;
+    }
+  
+    .responsive-shrink td,
+    .responsive-shrink th {
+      padding: 8px;
+      word-break: break-word;
+    }
+  }
+  
+  /* Optional: center table inside container */
+  .responsive-shrink {
+    margin: 0 auto;
+  }
+  

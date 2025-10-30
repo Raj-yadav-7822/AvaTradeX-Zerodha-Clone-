@@ -1,0 +1,22 @@
+@media (max-width: 992px) { /* Tablets and smaller */
+    .award-img {
+      max-width: 70%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) { /* Mobile */
+    .award-img {
+      max-width: 90%;
+    }
+    .press-logos {
+      max-width: 100%;
+    }
+    h1 {
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+  

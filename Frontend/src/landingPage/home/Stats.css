@@ -1,0 +1,36 @@
+/* Default Image Size */
+.stats-img {
+    max-width: 90%;
+  }
+  
+  /* Tablets & Small Screens */
+  @media (max-width: 992px) {
+    .stats-img {
+      max-width: 70%;
+    }
+  }
+  
+  /* Mobile Screens (Text पहले आएगा, Image नीचे) */
+  @media (max-width: 768px) {
+    .stats-img {
+      max-width: 90%;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+    
+    /* Image को Text के नीचे रखने के लिए */
+    .order-1 {
+      order: 1;
+    }
+    
+    .order-2 {
+      order: 2;
+    }
+  }
+  

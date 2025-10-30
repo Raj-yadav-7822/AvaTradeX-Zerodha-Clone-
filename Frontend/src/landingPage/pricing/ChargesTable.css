@@ -1,0 +1,48 @@
+/* ChargesTable.css */
+/* Only Equity table row height */
+.equity-table td,
+.equity-table th {
+  padding: 1.5rem 1rem; /* Vertical padding = more row height */
+}
+
+/* General row height and spacing */
+.table td,
+.table th {
+  padding: 1.2rem 1rem; /* More vertical padding = more row height */
+  white-space: nowrap;
+}
+
+/* Responsive scroll */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  min-width: 600px; /* Helps maintain layout on small screens */
+}
+
+/* Better readability */
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+/* Zebra striping */
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Tabs responsive tweaks */
+@media screen and (max-width: 576px) {
+  .nav-tabs .nav-item {
+    flex: 1;
+    text-align: center;
+  }
+
+  .nav-tabs .nav-link {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}

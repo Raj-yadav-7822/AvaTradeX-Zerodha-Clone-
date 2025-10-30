@@ -1,0 +1,32 @@
+/* Default: keep the container behavior */
+.container {
+    max-width: 1140px;
+    margin: auto;
+    padding: 0 15px;
+  }
+  
+  /* Medium screens: remove max-width to make it full width */
+  @media (max-width: 991.98px) {
+    .container {
+      max-width: 100%;
+      padding: 0 15px;
+    }
+  }
+  
+
+
+  .paragraph p{
+    font-size: small;
+    color: rgb(66, 66, 66);
+    line-height: 22px;
+}
+.paragraph h6{
+    color: 
+    rgb(66, 66, 66);
+    line-height: 19px;
+}
+.paragraph ul li{
+    font-size: small;
+    color: rgb(66, 66, 66);
+    line-height: 22px;
+}

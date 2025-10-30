@@ -1,0 +1,17 @@
+.anchor a {
+ font-size: 15px;
+  color: rgb(56, 126, 209);
+  cursor: pointer;
+ 
+  font-weight: 400;
+
+  
+}
+
+
+.anchor a:hover{
+    color:  rgb(107, 107, 107);
+}
+.anchor h5:hover{
+    color: rgb(56, 126, 209);
+}
