@@ -13,8 +13,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Vite env variable
+  //  Vite env variables
   const API_URL = import.meta.env.VITE_API_URL;
+  const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,21 +27,21 @@ const Login = () => {
     setLoading(true);
 
     try {
-      console.log("🟢 Sending login request...");
+      console.log(" Sending login request...");
       const response = await axios.post(`${API_URL}/login`, formData, {
         withCredentials: true,
       });
 
-      console.log("✅ Login successful:", response.data);
+      console.log(" Login successful:", response.data);
 
       // 💾 Save token + user info
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      // 🧭 Redirect
-      navigate("/");
+      // 🌐 Redirect to deployed dashboard (from .env)
+      window.location.href = DASHBOARD_URL;
     } catch (err) {
-      console.error("❌ Login error:", err);
+      console.error(" Login error:", err);
       setError(err.response?.data?.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
@@ -78,7 +79,9 @@ const Login = () => {
 
         <p>
           Don’t have an account?{" "}
-          <Link to="/signup" className="signup-link">Signup</Link>
+          <Link to="/signup" className="signup-link">
+            Signup
+          </Link>
         </p>
       </form>
     </div>
