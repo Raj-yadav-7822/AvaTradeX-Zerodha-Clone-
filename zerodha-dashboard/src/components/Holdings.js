@@ -7,10 +7,15 @@ const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
   const [selectedStock, setSelectedStock] = useState(null);
 
+  // 🟢 Backend Base URL (Render)
+  const BASE_URL = "https://avatradex-zerodha-clone.onrender.com";
+
   //  Fetch holdings from backend
   const fetchHoldings = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/allHoldings",{ withCredentials: true } );
+      const res = await axios.get(`${BASE_URL}/allHoldings`, {
+        withCredentials: true,
+      });
       setAllHoldings(res.data || []);
     } catch (err) {
       console.error("Error fetching holdings:", err);
@@ -118,9 +123,9 @@ const Holdings = () => {
           uid={selectedStock}
           refreshHoldings={() => {
             fetchHoldings();
-            setSelectedStock(null); 
+            setSelectedStock(null);
           }}
-          onCancel={() => setSelectedStock(null)} 
+          onCancel={() => setSelectedStock(null)}
         />
       )}
     </>

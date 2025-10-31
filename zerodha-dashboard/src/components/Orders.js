@@ -8,25 +8,29 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // 🟢 Deployed backend base URL
+  const BASE_URL = "https://avatradex-zerodha-clone.onrender.com";
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         console.log("📦 Fetching all orders from backend...");
 
-        const res = await axios.get("http://localhost:8080/allOrders", {
+        const res = await axios.get(`${BASE_URL}/allOrders`, {
           withCredentials: true,
         });
 
         if (res.status === 200) {
           setOrders(res.data);
-          console.log(" Orders fetched successfully:", res.data);
+          console.log("✅ Orders fetched successfully:", res.data);
         } else {
           throw new Error("Server returned unexpected status: " + res.status);
         }
       } catch (err) {
-        console.error(" Error fetching orders:", err);
+        console.error("❌ Error fetching orders:", err);
         setError("Failed to load orders. Please try again.");
       } finally {
+        // थोड़ा delay ताकि UI smooth लगे
         setTimeout(() => setLoading(false), 300);
       }
     };

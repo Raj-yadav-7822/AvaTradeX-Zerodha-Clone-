@@ -8,17 +8,24 @@ const BuyActionWindow = ({ uid, refreshHoldings }) => {
   const [stockPrice, setStockPrice] = useState(0.0);
   const { closeBuyWindow } = useContext(GeneralContext);
 
-  //  Common function to handle Buy/Sell
+  // 🟢 Backend Base URL (Render)
+  const BASE_URL = "https://avatradex-zerodha-clone.onrender.com";
+
+  // Common function to handle Buy/Sell
   const handleOrder = async (mode) => {
     try {
-      await axios.post("http://localhost:8080/newOrder", {
-        name: uid,
-        qty: Number(stockQuantity),
-        price: Number(stockPrice),
-        mode,
-      },{ withCredentials: true } );
+      await axios.post(
+        `${BASE_URL}/newOrder`,
+        {
+          name: uid,
+          qty: Number(stockQuantity),
+          price: Number(stockPrice),
+          mode,
+        },
+        { withCredentials: true }
+      );
 
-      alert(` ${mode} order placed successfully!`);
+      alert(`${mode} order placed successfully!`);
 
       // Holding refresh karo (live update without reload)
       if (refreshHoldings) {
@@ -28,7 +35,7 @@ const BuyActionWindow = ({ uid, refreshHoldings }) => {
       closeBuyWindow();
     } catch (error) {
       console.error(`Error placing ${mode} order:`, error);
-      alert(` Failed to place ${mode} order`);
+      alert(`Failed to place ${mode} order`);
     }
   };
 
@@ -64,17 +71,17 @@ const BuyActionWindow = ({ uid, refreshHoldings }) => {
       <div className="buttons">
         <span>Margin required ₹140.65</span>
         <div>
-          {/*  SELL button */}
+          {/* SELL button */}
           <button className="btn btn-red" onClick={() => handleOrder("SELL")}>
             Sell
           </button>
 
-          {/*  BUY button */}
+          {/* BUY button */}
           <button className="btn btn-blue" onClick={() => handleOrder("BUY")}>
             Buy
           </button>
 
-          {/*  Cancel button  */}
+          {/* Cancel button */}
           <button className="btn btn-grey" onClick={closeBuyWindow}>
             Cancel
           </button>
