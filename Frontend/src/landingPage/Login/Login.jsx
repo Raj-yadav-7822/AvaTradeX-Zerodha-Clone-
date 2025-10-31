@@ -13,12 +13,13 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🧠 Input handler
+  // ✅ Vite env variable
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 🚀 Login handler
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -26,7 +27,7 @@ const Login = () => {
 
     try {
       console.log("🟢 Sending login request...");
-      const response = await axios.post("http://localhost:8080/login", formData, {
+      const response = await axios.post(`${API_URL}/login`, formData, {
         withCredentials: true,
       });
 
@@ -36,8 +37,8 @@ const Login = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      // 🧭 Redirect to Zerodha Dashboard (or your own dashboard)
-      window.location.href = "http://localhost:3000/"; 
+      // 🧭 Redirect
+      navigate("/");
     } catch (err) {
       console.error("❌ Login error:", err);
       setError(err.response?.data?.message || "Login failed. Please try again.");

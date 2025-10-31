@@ -1,34 +1,41 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // ✅ Added for SPA navigation
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
+  // 🧠 State to hold form data
   const [data, setData] = useState({
     email: "",
     username: "",
     password: "",
   });
 
+  // 🔹 Get backend URL from .env
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // 🧠 Input change handler
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  // 🚀 Signup function
+  // 🚀 Signup handler
   const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8080/signup", data, {
+      console.log("🟢 Sending signup request to:", `${API_URL}/signup`);
+      const res = await axios.post(`${API_URL}/signup`, data, {
         withCredentials: true,
       });
 
       alert(res.data.message || "Signup successful!");
       console.log("✅ User created:", res.data);
 
-      // 🧭 Redirect to dashboard (React route)
-      window.location.href = "http://localhost:3000/";
+      // 🧭 Redirect to login page (after signup success)
+      navigate("/login");
     } catch (error) {
       console.error("❌ Signup error:", error);
       alert(error.response?.data?.message || "Signup failed");
@@ -77,7 +84,9 @@ const Signup = () => {
 
         <p className="signup-footer">
           Already have an account?{" "}
-          <Link to="/login" className="signup-link">Login</Link> {/* ✅ Fixed */}
+          <Link to="/login" className="signup-link">
+            Login
+          </Link>
         </p>
       </div>
     </div>
