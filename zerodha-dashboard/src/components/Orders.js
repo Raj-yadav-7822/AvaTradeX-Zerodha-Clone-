@@ -8,8 +8,8 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // 🟢 Deployed backend base URL
-  const BASE_URL = "https://avatradex-zerodha-clone.onrender.com";
+  // ✅ Use env variable instead of hardcoding URL
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchOrders = async () => {

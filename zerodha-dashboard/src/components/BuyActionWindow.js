@@ -8,10 +8,10 @@ const BuyActionWindow = ({ uid, refreshHoldings }) => {
   const [stockPrice, setStockPrice] = useState(0.0);
   const { closeBuyWindow } = useContext(GeneralContext);
 
-  // 🟢 Backend Base URL (Render)
-  const BASE_URL = "https://avatradex-zerodha-clone.onrender.com";
+  // ✅ Get backend base URL from .env (Render)
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
-  // Common function to handle Buy/Sell
+  // 🧠 Common function to handle Buy/Sell
   const handleOrder = async (mode) => {
     try {
       await axios.post(
@@ -27,15 +27,19 @@ const BuyActionWindow = ({ uid, refreshHoldings }) => {
 
       alert(`${mode} order placed successfully!`);
 
-      // Holding refresh karo (live update without reload)
+      // 🔄 Refresh holdings after successful order
       if (refreshHoldings) {
         refreshHoldings();
       }
 
+      // Close popup
       closeBuyWindow();
     } catch (error) {
-      console.error(`Error placing ${mode} order:`, error);
-      alert(`Failed to place ${mode} order`);
+      console.error(`❌ Error placing ${mode} order:`, error);
+      alert(
+        error.response?.data?.message ||
+          `Failed to place ${mode} order. Please try again.`
+      );
     }
   };
 

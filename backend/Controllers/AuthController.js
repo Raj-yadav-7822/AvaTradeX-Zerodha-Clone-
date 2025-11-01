@@ -36,7 +36,7 @@ module.exports.Signup = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: false,
+      secure: true,
     });
 
     return res.status(201).json({
@@ -82,7 +82,7 @@ module.exports.Login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: false,
+      secure: true,
     });
 
     res.status(200).json({

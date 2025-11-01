@@ -5,15 +5,16 @@ import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  // 🔹 State for form data, error, loading
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  //  Vite env variables
+  // 🔹 Vite environment variables (from Vercel)
   const API_URL = import.meta.env.VITE_API_URL;
   const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL;
 
@@ -27,21 +28,33 @@ const Login = () => {
     setLoading(true);
 
     try {
-      console.log(" Sending login request...");
-      const response = await axios.post(`${API_URL}/login`, formData, {
-        withCredentials: true,
-      });
+      console.log("🟡 Sending login request to:", `${API_URL}/login`);
 
-      console.log(" Login successful:", response.data);
+      // 🔸 First request (handle Render sleep)
+      let response;
+      try {
+        response = await axios.post(`${API_URL}/login`, formData, {
+          withCredentials: true,
+        });
+      } catch (firstError) {
+        console.warn("⚠️ First request failed (maybe Render cold start), retrying...");
+        // Retry once after short delay
+        await new Promise((r) => setTimeout(r, 2000));
+        response = await axios.post(`${API_URL}/login`, formData, {
+          withCredentials: true,
+        });
+      }
 
-      // 💾 Save token + user info
+      console.log("✅ Login successful:", response.data);
+
+      // 💾 Save token + user info in localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
       // 🌐 Redirect to deployed dashboard (from .env)
       window.location.href = DASHBOARD_URL;
     } catch (err) {
-      console.error(" Login error:", err);
+      console.error("❌ Login error:", err);
       setError(err.response?.data?.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);

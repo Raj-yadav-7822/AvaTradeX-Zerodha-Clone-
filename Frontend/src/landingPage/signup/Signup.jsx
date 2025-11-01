@@ -13,8 +13,12 @@ const Signup = () => {
     password: "",
   });
 
-  // 🔹 Get backend URL from .env
-  const API_URL = import.meta.env.VITE_API_URL;
+  // ✅ Backend URL (fixed one — Render app ke actual domain)
+  // Example: const API_URL = "https://avatradex-zerodha-clone.onrender.com";
+  // Replace this below URL with YOUR Render backend URL
+  const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://avatradex-zerodha-clone.onrender.com";
 
   // 🧠 Input change handler
   const handleChange = (e) => {

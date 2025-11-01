@@ -19,10 +19,10 @@ const url = process.env.MONGO_URL;
 app.use(
   cors({
     origin: [
-      process.env.CLIENT_URL,
+          process.env.CLIENT_URL,
       process.env.DASHBOARD_URL,
+      "https://ava-trade-x-zerodha-clone.vercel.app",       
       "https://ava-trade-x-zerodha-clone-dtd5.vercel.app",
-      "https://ava-trade-x-zerodha-clone-ntmh7hx8z-raj-yadav-7822s-projects.vercel.app",      "https://ava-trade-x-zerodha-clone-p81m6vs7g-raj-yadav-7822s-projects.vercel.app" 
     ],
     methods: ["GET", "POST"],
     credentials: true,

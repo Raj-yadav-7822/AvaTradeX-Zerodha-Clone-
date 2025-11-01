@@ -7,10 +7,10 @@ const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
   const [selectedStock, setSelectedStock] = useState(null);
 
-  // 🟢 Backend Base URL (Render)
-  const BASE_URL = "https://avatradex-zerodha-clone.onrender.com";
+  // ✅ Use environment variable instead of hardcoding
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
-  //  Fetch holdings from backend
+  // 🔹 Fetch holdings from backend
   const fetchHoldings = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/allHoldings`, {
@@ -18,15 +18,16 @@ const Holdings = () => {
       });
       setAllHoldings(res.data || []);
     } catch (err) {
-      console.error("Error fetching holdings:", err);
+      console.error("❌ Error fetching holdings:", err);
     }
   };
 
+  // 🔁 Load holdings on mount
   useEffect(() => {
     fetchHoldings();
   }, []);
 
-  //  Graph data
+  // 📊 Graph data
   const labels = allHoldings.map((stock) => stock.name);
   const data = {
     labels,
@@ -96,6 +97,7 @@ const Holdings = () => {
         </table>
       </div>
 
+      {/* Summary Row */}
       <div className="row">
         <div className="col">
           <h5>
@@ -117,7 +119,7 @@ const Holdings = () => {
 
       <VerticalGraph data={data} />
 
-      {/*  Show Buy/Sell window */}
+      {/* 🪟 Show Buy/Sell Window */}
       {selectedStock && (
         <BuyActionWindow
           uid={selectedStock}
