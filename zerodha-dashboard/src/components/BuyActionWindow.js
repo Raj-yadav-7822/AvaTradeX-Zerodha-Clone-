@@ -9,7 +9,7 @@ const BuyActionWindow = ({ uid, refreshHoldings }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
 
   // ✅ Get backend base URL from .env (Render)
-  const BASE_URL = import.meta.env.VITE_API_URL;
+ const BASE_URL = process.env.REACT_APP_API_URL || "https://avatradex-zerodha-clone.onrender.com";
 
   // 🧠 Common function to handle Buy/Sell
   const handleOrder = async (mode) => {

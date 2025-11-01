@@ -9,7 +9,7 @@ const Orders = () => {
   const [error, setError] = useState("");
 
   // ✅ Use env variable instead of hardcoding URL
-  const BASE_URL = import.meta.env.VITE_API_URL;
+ const BASE_URL = process.env.REACT_APP_API_URL || "https://avatradex-zerodha-clone.onrender.com";
 
   useEffect(() => {
     const fetchOrders = async () => {

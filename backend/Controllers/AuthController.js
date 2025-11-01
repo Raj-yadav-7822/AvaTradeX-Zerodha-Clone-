@@ -35,7 +35,7 @@ module.exports.Signup = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       secure: true,
     });
 
@@ -81,7 +81,7 @@ module.exports.Login = async (req, res) => {
     // Set cookie
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       secure: true,
     });
 
@@ -102,7 +102,7 @@ module.exports.Logout = async (req, res) => {
     // Cookie token remove
     res.cookie("token", "", {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       secure: false,
       expires: new Date(0), 
     });

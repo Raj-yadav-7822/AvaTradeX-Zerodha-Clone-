@@ -7,8 +7,8 @@ const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
   const [selectedStock, setSelectedStock] = useState(null);
 
-  // ✅ Use environment variable instead of hardcoding
-  const BASE_URL = import.meta.env.VITE_API_URL;
+  // ✅ Environment variable (for CRA)
+ const BASE_URL = process.env.REACT_APP_API_URL || "https://avatradex-zerodha-clone.onrender.com"; 
 
   // 🔹 Fetch holdings from backend
   const fetchHoldings = async () => {
@@ -97,29 +97,8 @@ const Holdings = () => {
         </table>
       </div>
 
-      {/* Summary Row */}
-      <div className="row">
-        <div className="col">
-          <h5>
-            29,875.<span>55</span>{" "}
-          </h5>
-          <p>Total investment</p>
-        </div>
-        <div className="col">
-          <h5>
-            31,428.<span>95</span>{" "}
-          </h5>
-          <p>Current value</p>
-        </div>
-        <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
-          <p>P&L</p>
-        </div>
-      </div>
-
       <VerticalGraph data={data} />
 
-      {/* 🪟 Show Buy/Sell Window */}
       {selectedStock && (
         <BuyActionWindow
           uid={selectedStock}
